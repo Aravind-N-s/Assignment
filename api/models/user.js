@@ -1,9 +1,9 @@
+require('dotenv/config')
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Schema = mongoose.Schema
-
 const userSchema = new Schema ({
     username:{
         type: String,
@@ -57,7 +57,7 @@ const userSchema = new Schema ({
 userSchema.pre('save', function(next){
     const user = this
     if(user.isNew){
-        (user.password == 'Admin$1' ? user.admin = true : user.admin = false)
+        (user.password == process.env.PASSWORD_ADMIN ? user.admin = true : user.admin = false)
         console.log(user.password)
         bcryptjs.genSalt(10)
         .then(salt =>{
@@ -81,13 +81,13 @@ userSchema.statics.findByCredentials = function(email, password){
                 return Promise.reject({errors:'Invalid E-mail/Password'})
             }
             return bcryptjs.compare(password, user.password)
-                        .then(result =>{
-                            if(result){
-                                return Promise.resolve(user)
-                            }else {
-                                return Promise.reject({errors:'Invalid E-mail/Password'})
-                            }
-                        })
+                    .then(result =>{
+                        if(result){
+                            return Promise.resolve(user)
+                        }else {
+                            return Promise.reject({errors:'Invalid E-mail/Password'})
+                        }
+                    })
         }) 
         .catch(err =>{
             return Promise.reject(err)
