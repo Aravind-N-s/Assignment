@@ -7,7 +7,7 @@ const {authenticateUser} = require('../api/middleware/authentication')
 
 router.get('/orders',authenticateUser, productController.list)
 router.get('/orders/:id',authenticateUser, productController.show)
-router.post('/orders',authenticateUser, productController.create)
+router.post('/orders',productController.create)
 router.put('/orders/:id',authenticateUser, productController.update)
 router.delete('/orders/:id',authenticateUser, productController.destroy)
 

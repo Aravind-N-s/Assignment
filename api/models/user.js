@@ -34,14 +34,6 @@ const userSchema = new Schema ({
         type: String,
         required: true
     },
-    hasKids:{
-        type: Boolean,
-        default: false
-    },
-    admin:{
-        type: Boolean,
-        default: false
-    },
     tokens:[{
         token:{
             type: String
@@ -57,8 +49,6 @@ const userSchema = new Schema ({
 userSchema.pre('save', function(next){
     const user = this
     if(user.isNew){
-        (user.password == process.env.PASSWORD_ADMIN ? user.admin = true : user.admin = false)
-        console.log(user.password)
         bcryptjs.genSalt(10)
         .then(salt =>{
             bcryptjs.hash(user.password, salt)

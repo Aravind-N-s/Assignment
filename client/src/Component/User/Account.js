@@ -1,7 +1,5 @@
 import React from 'react'
-import axios from '../../Config/axios'
 import {Link} from 'react-router-dom'
-
 import {connect} from 'react-redux'
 import {startAddContact} from '../../Redux/Action/userAction'
 

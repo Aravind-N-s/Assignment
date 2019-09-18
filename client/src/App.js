@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import 'react-tabs/style/react-tabs.css'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {BrowserRouter, Route, Link, Switch, Redirect} from 'react-router-dom'
+import {BrowserRouter, Route, Link, Switch,} from 'react-router-dom'
 
 import Login from './Component/User/Login'
 import Logout from './Component/User/Logout'
@@ -13,19 +13,17 @@ import Register from './Component/User/Register'
 
 class App extends React.Component {
   render(){
-    console.log(this.props.user)
     return (
       <BrowserRouter>
           {!_.isEmpty(this.props.user)?(
             <div>
-              <h1>Contact Manager</h1>
-                <Link to="/users/account">Account</Link>
-                <Switch>
-                  <>                
-                    <Route exact strict path="/users/account" component={Account}/>                     
-                    <Route exact strict path="/users/logout" component={Logout}/>    
-                  </>
-                </Switch>      
+              <Link to="/users/account">Account</Link>
+              <Switch>
+                <>                
+                  <Route exact strict path="/users/account" component={Account}/>                     
+                  <Route exact strict path="/users/logout" component={Logout}/>    
+                </>
+              </Switch>      
             </div>
           ):(
             <div>
@@ -38,12 +36,11 @@ class App extends React.Component {
                   <TabPanel className={{marginBottom:"0%"}}><Login handleAuth={this.handleAuth}/></TabPanel>
                   <TabPanel><Register handleAuth={this.handleAuth}/></TabPanel>
               </Tabs>
-              <Switch>
+              {/* <Switch>
                 <>  
-                  <Route exact strict path="/users/login" component={Login}/>
-                  <Route exact strict path="/users/register" component={Register}/>
+                  
                 </>   
-              </Switch>
+              </Switch> */}
             </div>
           )}     
       </BrowserRouter>

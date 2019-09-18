@@ -7,10 +7,14 @@ class Logout extends React.Component{
     
     componentDidMount(){
         this.props.dispatch(startResetContact())
+        localStorage.removeItem('userAuthToken')
+        this.props.history.push('/')
     }
     render(){
         return(
-            <div><p>logging out..</p></div>
+            <div className="alert alert-primary" role="alert">
+                Loggin Out
+            </div>
         )
     }
 }

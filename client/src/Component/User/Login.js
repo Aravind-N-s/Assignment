@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import axios from '../../Config/axios'
 import {connect} from 'react-redux'
 
@@ -32,7 +33,7 @@ class Login extends React.Component{
                 const token=response.data.token
                 if(token){
                     localStorage.setItem('userAuthToken',token)
-                   
+                    this.props.history.push('/users/account')
                 }
             }
         })
@@ -41,7 +42,7 @@ class Login extends React.Component{
         })
 
     }
-    render(props){
+    render(){
         return(
             <form className="container" onSubmit={this.handleSubmit}>
                 <h2 className="text-dark">LOGIN</h2>
@@ -56,4 +57,5 @@ class Login extends React.Component{
         )
     }
 }
+Login = withRouter(Login)
 export default connect()(Login)

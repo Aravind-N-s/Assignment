@@ -19,11 +19,6 @@ const ProductSchema = new Schema({
         type: String,
         default: null
     },
-    user:{
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
     brand:{
         type: Schema.Types.ObjectId,
         ref: 'Brand',
@@ -36,7 +31,11 @@ const ProductSchema = new Schema({
     },
     delivery:{
         type: Date,
-        required: true
+        required: false
+    },
+    hasKids:{
+        type: Boolean,
+        default: false
     },
     createdAt:{
         type: Date,
