@@ -1,26 +1,60 @@
+import _ from 'lodash'
+import './Config/App.css';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {connect} from 'react-redux'
+import 'react-tabs/style/react-tabs.css'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {BrowserRouter, Route, Link, Switch, Redirect} from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Login from './Component/User/Login'
+import Logout from './Component/User/Logout'
+import Account from './Component/User/Account'
+import Register from './Component/User/Register'
+
+class App extends React.Component {
+  render(){
+    console.log(this.props.user)
+    return (
+      <BrowserRouter>
+          {!_.isEmpty(this.props.user)?(
+            <div>
+              <h1>Contact Manager</h1>
+                <Link to="/users/account">Account</Link>
+                <Switch>
+                  <>                
+                    <Route exact strict path="/users/account" component={Account}/>                     
+                    <Route exact strict path="/users/logout" component={Logout}/>    
+                  </>
+                </Switch>      
+            </div>
+          ):(
+            <div>
+              <img id="img" alt="loginImg" src="/1.jpg"/>
+              <Tabs id="tabs">
+                  <TabList>
+                      <Tab>Login</Tab>
+                      <Tab>Register</Tab>
+                  </TabList>
+                  <TabPanel className={{marginBottom:"0%"}}><Login handleAuth={this.handleAuth}/></TabPanel>
+                  <TabPanel><Register handleAuth={this.handleAuth}/></TabPanel>
+              </Tabs>
+              <Switch>
+                <>  
+                  <Route exact strict path="/users/login" component={Login}/>
+                  <Route exact strict path="/users/register" component={Register}/>
+                </>   
+              </Switch>
+            </div>
+          )}     
+      </BrowserRouter>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(App)

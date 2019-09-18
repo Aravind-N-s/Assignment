@@ -1,0 +1,51 @@
+import axios from '../../Config/axios'
+
+export const startAddContact = () =>{
+    return (dispatch) => {
+        axios.get('/users/account',{
+            headers:{
+                'x-auth':localStorage.getItem('userAuthToken')
+            }
+        })
+        .then(response => {
+            if(response.data.hasOwnProperty('errors')){
+                alert(response.data.message)
+            }
+            else {
+                dispatch(setUser(response.data))
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+}
+
+export const setUser = (user) => {
+    return { type: 'SET_USER', payload: user}
+}
+
+export const startResetContact = () =>{
+    return (dispatch) => {
+        axios.delete('/users/logout',{
+            headers:{
+                'x-auth':localStorage.getItem('userAuthToken')
+            }
+        })
+        .then(response => {
+            if(response.data.hasOwnProperty('errors')){
+                alert(response.data.message)
+            }
+            else {
+                dispatch(resetUser(response.data))
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+}
+
+export const resetUser = () => {
+    return { type: 'RESET_USER'}
+}
