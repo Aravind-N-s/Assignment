@@ -1,33 +1,67 @@
-.App {
+body {
+  background-color: darkturquoise;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+#homepage{
+  margin-Top: 5%;
+  margin-Left: 5%;
+  margin-Right: 5%;
+  opacity: 77%;
+  display:grid;
+  grid-template-columns: 45% 55%;
+  grid-auto-rows: minmax(auto);
+  text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#tabs{
+  border-Left:solid;
+  padding: 10%;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+#form{
+    width: 50%;
+    padding: 3%;
+    height: 250px;
   }
-  to {
-    transform: rotate(360deg);
+
+#input{
+  margin-Left: 2%;
+  margin-Right: 2%;
+  text-align:center; 
+  padding: 6%;
+}
+
+#img{
+  margin-Top: 5%;
+  margin-Left: 5%;
+  width: 50%;
+  animation-name: milk;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes milk {
+  0% {
+    border-radius: 50% 50% 50% 0;
+    transform: rotateY(180deg);
+    transition-delay: 1s;
   }
+  100% {
+    border-radius: 50% 50% 50% 0;
+  }
+}
+
+.react-tabs__tab {
+  padding-right: 35% !important;
+}
+
+.bg-primary {
+  margin-bottom : 10px;
+}
+
+h2 {
+  color : blue;
+  text-shadow: 3px 2px blueviolet;
 }

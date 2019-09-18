@@ -44,12 +44,12 @@ class Login extends React.Component{
     }
     render(){
         return(
-            <form className="container" onSubmit={this.handleSubmit}>
-                <h2 className="text-dark">LOGIN</h2>
-                <label>
+            <form id = "form" style={{float:"left"}} className="form-group" onSubmit={this.handleSubmit}>
+                <h2>Login</h2>
+                <label id = "input">
                     <input className = "form-control" type="text" name="email" value={this.state.email}  onChange={this.handleChange} placeholder="Email"/>
                 </label><br/>               
-                <label>                               
+                <label id = "input">                      
                     <input className = "form-control" type="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" />
                 </label><br />
                 <input className = "btn btn-success" type="submit"/><br />

@@ -40,16 +40,16 @@ class Register extends React.Component{
 
     render(){
         return(         
-            <form className="form-group container" onSubmit={this.handleSubmit}>
+            <form id = "form" style={{float:"right"}} className="form-group container" onSubmit={this.handleSubmit}>
                 <fieldset>  
-                    <h2 className="text-dark">REGISTER</h2>
-                    <label>
+                    <h2>Register</h2>
+                    <label id = "input">
                         <input className = "form-control" type="text" name="username" value={this.state.username} onChange={this.handleChange} placeholder="Username"/>
                     </label><br/>
-                    <label>
+                    <label id = "input">
                         <input className = "form-control" type="text" name="email" value={this.state.email}  onChange={this.handleChange} placeholder="Email"/>
                     </label><br/>                       
-                    <label>                                
+                    <label id = "input">                                
                         <input className = "form-control" type="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" />
                     </label><br/>
                     <input className="btn btn-success" type="submit" value="Submit"/>
