@@ -1,26 +1,26 @@
-const Product = require('../models/product')
+const Order = require('../models/order')
 module.exports.list = (req,res) => {
     const {user} = req
-    Product.find({
+    Order.find({
         user:user._id
     }).sort({createdAt: -1})
-    .then((products) => {
-        res.json(products)
+    .then((orders) => {
+        res.json(orders)
     })
     .catch((err) => {
         res.json(err)
     })
 }
 
-//post products
+//post orders
 module.exports.create = (req,res) =>{
     const {user} = req
     const body = req.body
-    const product = new Product(body)
-    product.user = user._id
-    product.save()
-        .then((products) => {
-            res.json(products)
+    const order = new Order(body)
+    order.user = user._id
+    order.save()
+        .then((orders) => {
+            res.json(orders)
         })
         .catch((err) => {
             res.json(err)
@@ -28,18 +28,18 @@ module.exports.create = (req,res) =>{
 
 }
 
-//show one product
+//show one order
 module.exports.show = (req,res) => {
     const id = req.params.id
-    Product.find({
+    Order.find({
         user:req.user._id,
         _id: id
     }).populate('email')
-    .then((product) => {
-        if(!product){
+    .then((order) => {
+        if(!order){
             res.json({})
         }
-        res.json(product)
+        res.json(order)
     })
     .catch((err) => {
         res.json(err)
@@ -49,29 +49,29 @@ module.exports.show = (req,res) => {
 module.exports.update =  (req, res) => {
     const id = req.params.id
     const body = req.body
-    Product.findOneAndUpdate({
+    Order.findOneAndUpdate({
         user: req.user._id,
         _id: id
     }, { $set: body }, {new: true, runValidators: true})
-    .then((product) => {
-        if(!product){
+    .then((order) => {
+        if(!order){
             res.json({})
         }
-        res.json(product)
+        res.json(order)
     })
     .catch((err) => {
         res.json(err)
     })
 }
 
-//delete a product
+//delete a order
 module.exports.destroy = (req, res) => {
     const id = req.params.id
-    Product.findOneAndDelete({
+    Order.findOneAndDelete({
         user: req.user._id,
         _id:id})
-    .then((product) => {
-        res.json(product)
+    .then((order) => {
+        res.json(order)
     })
     .catch((err) => {
         res.json(err)

@@ -1,4 +1,4 @@
-const Brand = require('../models/product')
+const Brand = require('../models/brand')
 module.exports.list = (req,res) => {
     const {user} = req
     Brand.find({

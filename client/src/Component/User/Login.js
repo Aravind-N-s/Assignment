@@ -33,7 +33,6 @@ class Login extends React.Component{
                 const token=response.data.token
                 if(token){
                     localStorage.setItem('userAuthToken',token)
-                    this.props.history.push('/users/account')
                 }
             }
         })

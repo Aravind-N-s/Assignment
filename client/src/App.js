@@ -1,8 +1,10 @@
 import _ from 'lodash'
 import './Config/App.css';
 import React from 'react';
+
 import {connect} from 'react-redux'
 import 'react-tabs/style/react-tabs.css'
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {BrowserRouter, Route, Link, Switch,} from 'react-router-dom'
 
@@ -11,7 +13,7 @@ import Logout from './Component/User/Logout'
 import Account from './Component/User/Account'
 import Register from './Component/User/Register'
 
-import Order from './Component/Product/Order'
+import Order from './Component/Order/Order'
 
 class App extends React.Component {
   render(){
@@ -88,5 +90,5 @@ const mapStateToProps = (state) => {
     user: state.user
   }
 }
-
+// App = withRouter(App)
 export default connect(mapStateToProps)(App)

@@ -1,14 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {startAddContact} from '../../Redux/Action/userAction'
 
 class Account extends React.Component{
-    // tokens are sending to server
-    componentDidMount(){
-        this.props.dispatch(startAddContact())   
-    }
-
     render(){
         return(
             <div>

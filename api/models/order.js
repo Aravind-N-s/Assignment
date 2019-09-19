@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 //Schema - Object Constructor Function
 const Schema = mongoose.Schema
-const ProductSchema = new Schema({
+const OrderSchema = new Schema({
     name:{
         type: String,
         required: true
@@ -37,8 +37,14 @@ const ProductSchema = new Schema({
         required: true
     },
     location:{
-        type: String,
-        required: true
+        latitude:{
+            type: Number,
+            required: true
+        },
+        longitude:{
+            type: Number,
+            required: true
+        }
     },
     type:{
         type: Schema.Types.ObjectId,
@@ -73,6 +79,6 @@ const ProductSchema = new Schema({
     }
 })
 
-const Product = mongoose.model('Product', ProductSchema)
+const Order = mongoose.model('Order', OrderSchema)
 
-module.exports = Product
+module.exports = Order

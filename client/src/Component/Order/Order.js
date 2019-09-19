@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { geolocated } from "react-geolocated"
 
 class Order extends React.Component {
     constructor(){
@@ -10,6 +11,8 @@ class Order extends React.Component {
             phoneNo: '',
             units: 0.5,
             type: '',
+            latitude: '',
+            longitude: '',
             brand: [],   
             hasKids: false,
             note:''
@@ -18,6 +21,7 @@ class Order extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleHasKids = this.handleHasKids.bind(this)
+        this.handleLocation = this.handleLocation.bind(this)
     }
     handleChange(e){
         e.persist()
@@ -27,9 +31,9 @@ class Order extends React.Component {
     }
 
     handleHasKids(e){
-        // e.persist()
         this.setState((prevState) => ({hasKids: !prevState.hasKids}))
     }
+
     handleUnits(e){
         e.preventDefault()
         if(e.target.name == 'up'){
@@ -53,17 +57,26 @@ class Order extends React.Component {
             type: this.state.type,  
             hasKids: this.state.hasKids,
             note: this.state.note,
+            location: {latitude: this.state.latitude,longitude: this.state.longitude},
             brand: this.state.brand
         }
-        this.props.handleSubmit(formData)
+        this.props.startAddOrder(formData)
     }
-    // componentDidMount() {
-    //     console.log('oxygen')
-    // }
-
+    
+    handleLocation(e){
+        e.preventDefault()
+        let success = (pos) => {
+            var crd = pos.coords;
+            this.setState(() => ({
+                latitude: crd.latitude,
+                longitude: crd.longitude
+            }))
+        }
+        navigator.geolocation.getCurrentPosition(success)
+        
+    }
     render() {
         console.log(this.state)
-        //onChange={this.handleChange}
         return (
             <form> 
                 <div className="form-row">
@@ -81,7 +94,10 @@ class Order extends React.Component {
                     Select2<br/>
                     <input className = "form-control" type="checkbox" checked = {this.state.hasKids == true} onChange={this.handleHasKids}/>Kids
                     <textarea rows="4" cols="50" className = "form-control" type="textarea" name="note" value={this.state.note}  onChange={this.handleChange} placeholder="Any Notes"/>                    
-                </label><br/>      
+                    <button onClick={this.handleLocation}>Locate Me</button><br/>
+                    <button onClick={this.handleSubmit}>Submit</button>
+                </label><br/>     
+
             </form>
         )
     }

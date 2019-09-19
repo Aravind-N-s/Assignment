@@ -1,4 +1,4 @@
-const Type = require('../models/product')
+const Type = require('../models/type')
 module.exports.list = (req,res) => {
     const {user} = req
     Type.find({

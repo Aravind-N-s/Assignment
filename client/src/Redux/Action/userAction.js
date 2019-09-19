@@ -1,6 +1,6 @@
 import axios from '../../Config/axios'
 
-export const startAddContact = () =>{
+export const startAddUser = () =>{
     return (dispatch) => {
         axios.get('/users/account',{
             headers:{
@@ -25,7 +25,7 @@ export const setUser = (user) => {
     return { type: 'SET_USER', payload: user}
 }
 
-export const startResetContact = () =>{
+export const startResetUser = () =>{
     return (dispatch) => {
         axios.delete('/users/logout',{
             headers:{

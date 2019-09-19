@@ -1,12 +1,12 @@
  
 import React from 'react'
 import {connect} from 'react-redux'
-import {startResetContact} from '../../Redux/Action/userAction'
+import {startResetUser} from '../../Redux/Action/userAction'
 
 class Logout extends React.Component{
     
     componentDidMount(){
-        this.props.dispatch(startResetContact())
+        this.props.dispatch(startResetUser())
         localStorage.removeItem('userAuthToken')
         this.props.history.push('/')
     }
