@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { geolocated } from "react-geolocated"
+import Select from 'react-select'
+import {startAddOrder} from '../../Redux/Action/orderAction'
 
 class Order extends React.Component {
     constructor(){
@@ -10,24 +11,33 @@ class Order extends React.Component {
             email: '',
             phoneNo: '',
             units: 0.5,
-            type: '',
             latitude: '',
             longitude: '',
-            brand: [],   
+            brand: [], 
+            type: '', 
             hasKids: false,
-            note:''
+            note:'',
+            order: false
         }
         this.handleUnits = this.handleUnits.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleHasKids = this.handleHasKids.bind(this)
         this.handleLocation = this.handleLocation.bind(this)
+        this.handleSelect = this.handleSelect.bind(this)
     }
     handleChange(e){
         e.persist()
         this.setState(() => ({
             [e.target.name]: e.target.value
         }))
+    }
+
+    handleSelect(e){
+        const select = e
+        this.setState(() => ({
+            [e.name] : select.map((sel) => {return sel.value})
+        }))    
     }
 
     handleHasKids(e){
@@ -60,7 +70,8 @@ class Order extends React.Component {
             location: {latitude: this.state.latitude,longitude: this.state.longitude},
             brand: this.state.brand
         }
-        this.props.startAddOrder(formData)
+        console.log(formData)
+        this.props.dispatch(startAddOrder(formData))
     }
     
     handleLocation(e){
@@ -75,32 +86,56 @@ class Order extends React.Component {
         navigator.geolocation.getCurrentPosition(success)
         
     }
-    render() {
-        console.log(this.state)
+    render() {    
+        console.log(this.state)  
         return (
-            <form> 
-                <div className="form-row">
-                    <div className="col">
-                        <input className = "form-control" type="text" name="name" value={this.state.name}  onChange={this.handleChange} placeholder="Name"/>
-                    </div>
-                    <div className="col">
-                        <input className = "form-control" type="text" name="email" value={this.state.email}  onChange={this.handleChange} placeholder="Email"/>
-                    </div>
-                </div>
+            <form id = "form">
                 <label id = "input">
-                    <input className = "form-control" type="number" name="phoneNo" value={this.state.phoneNo}  onChange={this.handleChange} placeholder="Phone Number"/>
-                    <button onClick={this.handleUnits} name="down" disabled = {this.state.units == 0.5}>-</button>{this.state.units}<button onClick={this.handleUnits} name="up">+</button><br/>                  
-                    Select1<br/>
-                    Select2<br/>
-                    <input className = "form-control" type="checkbox" checked = {this.state.hasKids == true} onChange={this.handleHasKids}/>Kids
-                    <textarea rows="4" cols="50" className = "form-control" type="textarea" name="note" value={this.state.note}  onChange={this.handleChange} placeholder="Any Notes"/>                    
-                    <button onClick={this.handleLocation}>Locate Me</button><br/>
-                    <button onClick={this.handleSubmit}>Submit</button>
-                </label><br/>     
-
+                    <input  className = "xs-4 form-control" type="text" name="name" value={this.state.name}  onChange={this.handleChange} placeholder="Name"/>
+                    <input  className = "xs-4 form-control" type="text" name="email" value={this.state.email}  onChange={this.handleChange} placeholder="Email"/>
+                    <input  className = "xs-4 form-control" type="number" name="phoneNo" value={this.state.phoneNo}  onChange={this.handleChange} placeholder="Phone Number"/>
+                </label>
+                <button id = "input" onClick={this.handleUnits} name="down" disabled = {this.state.units == 0.5}>-</button>{this.state.units}<button id = "input" onClick={this.handleUnits} name="up">+</button><br/>                  
+                <Select
+                    isMulti="true" placeholder = 'Brand' isSearchable = "true" isClearable = {true} 
+                    onChange={this.handleSelect}
+                    options={
+                        this.props.brand && (
+                            this.props.brand.map((brands) => {
+                                return {
+                                    value : brands._id,
+                                    label : brands.name,
+                                    name : 'brand'
+                                }
+                            })
+                        )
+                    }/>
+                <Select
+                    isMulti = "true" placeholder = 'Type' isSearchable = "true" isClearable = "true" closeMenuOnSelect={false}
+                    onChange={this.handleSelect}
+                    options={
+                        this.props.type && (
+                            this.props.type.map((types) => {
+                                return {
+                                    value : types._id,
+                                    label : types.name,
+                                    name : 'type'
+                                }
+                            })
+                        )
+                    }/>
+                <input id = "input" className = "form-control" type="checkbox" checked = {this.state.hasKids == true} onChange={this.handleHasKids}/>Kids <br/>
+                <textarea id = "input" rows="4" cols="50" className = "form-control" type="textarea" name="note" value={this.state.note}  onChange={this.handleChange} placeholder="Any Notes"/><br/>                  
+                <button onClick={this.handleLocation}>Locate Me</button><br/>
+                <button onClick={this.handleSubmit}>Submit</button><br/>
             </form>
         )
     }
 }
-
-export default connect()(Order)
+const mapStateToProps = (state) => {
+    return {
+        brand : state.brand,
+        type: state.type
+      }
+}
+export default connect(mapStateToProps)(Order)

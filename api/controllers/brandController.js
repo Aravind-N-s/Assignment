@@ -1,14 +1,11 @@
 const Brand = require('../models/brand')
 module.exports.list = (req,res) => {
-    const {user} = req
-    Brand.find({
-        user:user._id
-    }).sort({createdAt: -1})
+    Brand.find().sort({createdAt: -1})
     .then((brands) => {
         res.json(brands)
     })
     .catch((err) => {
-        res.json(err)
+        res.send(err)
     })
 }
 
@@ -26,24 +23,6 @@ module.exports.create = (req,res) =>{
             res.json(err)
         })
 
-}
-
-//show one brand
-module.exports.show = (req,res) => {
-    const id = req.params.id
-    Brand.find({
-        user:req.user._id,
-        _id: id
-    }).populate('email')
-    .then((brand) => {
-        if(!brand){
-            res.json({})
-        }
-        res.json(brand)
-    })
-    .catch((err) => {
-        res.json(err)
-    })
 }
 
 module.exports.update =  (req, res) => {

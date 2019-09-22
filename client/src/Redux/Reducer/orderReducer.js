@@ -1,19 +1,18 @@
-const orderReducer = (state ={}, action) => {
+const orderReducer = (state =[], action) => {
     switch(action.type){
         case'SET_ORDER':{
-            return {...action.payload}
+            return [...action.payload]
         }
         case'ADD_ORDER':{
-            return{...action.payload}
+            return [...state,action.payload]
         }
-        case'EDIT_USER':{
-            return{...action.payload}
+        case'EDIT_ORDER':{
+            return [...action.payload]
         }
-        case'RESET_USER':{
-            return {}
-        }
+        case 'REMOVE_ORDER':
+            return state.filter(order => order._id!==action.payload)
         default:
-            return {...state}
+            return [...state]
     }
 } 
 

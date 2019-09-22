@@ -1,14 +1,15 @@
 import React from 'react'
-import { withRouter } from 'react-router'
 import axios from '../../Config/axios'
 import {connect} from 'react-redux'
+import Swal from 'sweetalert2'
+import {Redirect} from 'react-router-dom'
 
 class Login extends React.Component{
     constructor(props){
         super(props)
         this.state={
             email:'',
-            password:'',
+            password:''
         }
         this.handleChange=this.handleChange.bind(this)
         this.handleSubmit=this.handleSubmit.bind(this)
@@ -28,13 +29,14 @@ class Login extends React.Component{
         axios.post(`/users/login`,formData)
         .then((response)=>{
             if(response.data.errors){
-                alert(response.data.errors)
+                Swal.fire(response.data.errors)
             }else{
                 const token=response.data.token
                 if(token){
                     localStorage.setItem('userAuthToken',token)
                 }
             }
+            return <Redirect to={{pathname: '/users/account'}}/>
         })
         .catch(err =>{
             alert(err)
@@ -56,5 +58,5 @@ class Login extends React.Component{
         )
     }
 }
-Login = withRouter(Login)
+// Login = withRouter(Login)
 export default connect()(Login)

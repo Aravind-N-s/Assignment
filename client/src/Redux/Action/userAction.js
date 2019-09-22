@@ -12,7 +12,7 @@ export const startAddUser = () =>{
                 alert(response.data.message)
             }
             else {
-                dispatch(setUser(response.data))
+                dispatch(addUser(response.data))
             }
         })
         .catch((err) => {
@@ -21,7 +21,7 @@ export const startAddUser = () =>{
     }
 }
 
-export const setUser = (user) => {
+export const addUser = (user) => {
     return { type: 'SET_USER', payload: user}
 }
 

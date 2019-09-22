@@ -1,9 +1,6 @@
 const Type = require('../models/type')
 module.exports.list = (req,res) => {
-    const {user} = req
-    Type.find({
-        user:user._id
-    }).sort({createdAt: -1})
+    Type.find().sort({createdAt: -1})
     .then((types) => {
         res.json(types)
     })

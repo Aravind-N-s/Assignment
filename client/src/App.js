@@ -11,14 +11,17 @@ import {BrowserRouter, Route, Link, Switch,} from 'react-router-dom'
 import Login from './Component/User/Login'
 import Logout from './Component/User/Logout'
 import Account from './Component/User/Account'
-import Register from './Component/User/Register'
+import Register from './Component/User/Register' 
 
 import Order from './Component/Order/Order'
 
+import BrandDetails from './Component/Brand/Details'
+
+import TypeDetails from './Component/Type/Details'
+
 class App extends React.Component {
-  render(){
+  render(props){
     return (
-      
       <BrowserRouter>
         {!_.isEmpty(this.props.user)?(
           <div>
@@ -31,25 +34,29 @@ class App extends React.Component {
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                   <li className="nav-item active">
-                    <a className="nav-link">Home <span className="sr-only">(current)</span></a>
+                    <button className="nav-link">Home</button> 
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link">Features</a>
+                    <button className="nav-link">Features</button>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link">Pricing</a>
+                    <button className="nav-link">Pricing</button>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <button className="nav-link disabled">Disabled</button> 
                   </li>
                 </ul>
               </div>
             </nav>        
-            <Link to="/users/account">Account</Link>
+            <Link to="/users/account">Account</Link><br/>
+            <Link to="/brand">Brand</Link><br/>          
+            <Link to="/type">Type</Link>            
             <Switch>
               <>                
                 <Route exact strict path="/users/account" component={Account}/>                     
-                <Route exact strict path="/users/logout" component={Logout}/>    
+                <Route exact strict path="/users/logout" component={Logout}/>
+                <Route exact strict path="/brand" component={BrandDetails}/>       
+                <Route exact strict path="/type" component={TypeDetails}/>       
               </>
             </Switch>      
           </div>
@@ -65,19 +72,15 @@ class App extends React.Component {
               <img id="img" alt="loginImg" src="/1.jpeg"/>
               <Tabs id="tabs">
                   <TabList>
-                      <Tab>Login</Tab>
-                      <Tab>Register</Tab>
+                    <Tab>Buy</Tab>
+                    <Tab>Login</Tab>
+                    <Tab>Register</Tab>
                   </TabList>
-                  <TabPanel className={{marginBottom:"0%"}}><Login handleAuth={this.handleAuth}/></TabPanel>
+                  <TabPanel className={{marginBottom:"0%"}}><Order/></TabPanel>
+                  <TabPanel><Login handleAuth={this.handleAuth}/></TabPanel>
                   <TabPanel><Register handleAuth={this.handleAuth}/></TabPanel>
               </Tabs>
             </div>
-            <Order/>
-            {/* <Switch>
-              <>  
-                
-              </>   
-            </Switch> */}
           </div>
         )}     
       </BrowserRouter>
@@ -87,8 +90,9 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    brand: state.brand,
+    type: state.type
   }
 }
-// App = withRouter(App)
 export default connect(mapStateToProps)(App)

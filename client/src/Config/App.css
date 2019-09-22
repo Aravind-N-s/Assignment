@@ -19,6 +19,10 @@ body {
   padding: 10%;
 }
 
+button{
+  background-color: darkturquoise;
+}
+
 #form{
     width: 50%;
     padding: 3%;
@@ -54,7 +58,7 @@ body {
 }
 
 .react-tabs__tab {
-  padding-right: 35% !important;
+  padding-right: 20% !important;
 }
 
 .bg-primary {

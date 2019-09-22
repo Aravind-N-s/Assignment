@@ -1,12 +1,33 @@
 import axios from '../../Config/axios'
 
-export const setOrder = (order) => {
-    return { type: 'SET_ORDER', payload: order}
+export const setType = (type) => {
+    return { type: 'SET_TYPE', payload: type}
 }
 
-export const startSetOrder = () =>{
+export const startSetType = () =>{
     return (dispatch) => {
-        axios.get('/orders',{
+        axios.get('/type')
+        .then(response => {
+            if(response.data.hasOwnProperty('errors')){
+                alert(response.data.message)
+            }
+            else {
+                dispatch(setType(response.data))
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+}
+
+export const addType = (type) => {
+    return { type: 'ADD_TYPE', payload: type}
+}
+
+export const startAddType = (formData) =>{
+    return (dispatch) => {
+        axios.post('/type', formData,{
             headers:{
                 'x-auth': localStorage.getItem('userAuthToken')
             }
@@ -16,7 +37,7 @@ export const startSetOrder = () =>{
                 alert(response.data.message)
             }
             else {
-                dispatch(setOrder(response.data))
+                dispatch(addType(response.data))
             }
         })
         .catch((err) => {
@@ -25,34 +46,13 @@ export const startSetOrder = () =>{
     }
 }
 
-export const addOrder = (order) => {
-    return { type: 'ADD_ORDER', payload: order}
+export const editType = (type) => {
+    return { type: 'EDIT_TYPE', payload:type}
 }
 
-export const startAddOrder = (formData) =>{
+export const startEditType = (formData) =>{
     return (dispatch) => {
-        axios.post('/orders', formData)
-        .then(response => {
-            if(response.data.hasOwnProperty('errors')){
-                alert(response.data.message)
-            }
-            else {
-                dispatch(addOrder(response.data))
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }
-}
-
-export const editOrder = (order) => {
-    return { type: 'EDIT_ORDER', payload: order}
-}
-
-export const startEditOrder = (formData) =>{
-    return (dispatch) => {
-        axios.put('/orders/:id',formData,{
+        axios.put('/type/:id',formData,{
             headers:{
                 'x-auth':localStorage.getItem('userAuthToken')
             }
@@ -62,7 +62,7 @@ export const startEditOrder = (formData) =>{
                 alert(response.data.message)
             }
             else {
-                dispatch(editOrder(response.data))
+                dispatch(editType(response.data))
             }
         })
         .catch((err) => {
@@ -71,13 +71,13 @@ export const startEditOrder = (formData) =>{
     }
 }
 
-export const resetOrder = () => {
-    return { type: 'RESET_ORDER'}
+export const resetType = () => {
+    return { type: 'RESET_TYPE'}
 }
 
-export const startResetOrder = () =>{
+export const startResetType = () =>{
     return (dispatch) => {
-        axios.delete('/orders/:id',{
+        axios.delete('/type/:id',{
             headers:{
                 'x-auth':localStorage.getItem('userAuthToken')
             }
@@ -87,7 +87,7 @@ export const startResetOrder = () =>{
                 alert(response.data.message)
             }
             else {
-                dispatch(resetOrder(response.data))
+                dispatch(resetType(response.data))
             }
         })
         .catch((err) => {

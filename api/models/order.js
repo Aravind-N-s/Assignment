@@ -19,23 +19,38 @@ const OrderSchema = new Schema({
             }
         }
     },
+    phoneNo: {
+        type: String,
+        required: true,
+        unique: true,
+        maxLength:10,
+        validate:{
+            validator: function(value){
+                return validator.isMobilePhone(value)
+            },
+            message: function(){
+                return 'Invalid Email Format'
+            }
+        }
+    },
     units:{
         type: Number,
         required: true,
-    },
-    location:{
-        type: String,
-        required: true
     },
     note:{
         type: String,
         default: null
     },
-    brand:{
+    brand:[{
         type: Schema.Types.ObjectId,
         ref: 'Brand',
         required: true
-    },
+    }],
+    type:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Type',
+        required: true
+    }],
     location:{
         latitude:{
             type: Number,
@@ -43,35 +58,16 @@ const OrderSchema = new Schema({
         },
         longitude:{
             type: Number,
-            required: true
+            required:true
         }
     },
-    type:{
-        type: Schema.Types.ObjectId,
-        ref: 'Type',
-        required: true
-    },
     delivery:{
-        type: Date,
-        required: false
+        type: Boolean,
+        default: false
     },
     hasKids:{
         type: Boolean,
         default: false
-    },
-    phoneNo: {
-        type: Number,
-        required: true,
-        unique: true,
-        validate:{
-            validator: function(value){
-                return validator.isMobilePhone(value[en-IN])
-            },
-            message: function(){
-                return 'Invalid Email Format'
-            }
-        },
-        maxLength:10
     },
     createdAt:{
         type: Date,

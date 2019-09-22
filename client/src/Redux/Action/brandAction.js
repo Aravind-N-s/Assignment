@@ -1,12 +1,27 @@
 import axios from '../../Config/axios'
 
-export const setOrder = (order) => {
-    return { type: 'SET_ORDER', payload: order}
+export const setBrand = (brand) => {
+    console.log('action brand',brand)
+    return { type: 'SET_BRAND', payload: brand}
 }
 
-export const startSetOrder = () =>{
+export const startSetBrand = () =>{
     return (dispatch) => {
-        axios.get('/orders',{
+        axios.get('/brands')
+        .then(response => {
+            console.log('action brand',response.data)
+            dispatch(setBrand(response.data))
+        })
+    }
+}
+
+export const addBrand = (brand) => {
+    return { type: 'ADD_BRAND', payload: brand}
+}
+
+export const startAddBrand = (formData) =>{
+    return (dispatch) => {
+        axios.post('/brands', formData,{
             headers:{
                 'x-auth': localStorage.getItem('userAuthToken')
             }
@@ -16,7 +31,7 @@ export const startSetOrder = () =>{
                 alert(response.data.message)
             }
             else {
-                dispatch(setOrder(response.data))
+                dispatch(addBrand(response.data))
             }
         })
         .catch((err) => {
@@ -25,34 +40,13 @@ export const startSetOrder = () =>{
     }
 }
 
-export const addOrder = (order) => {
-    return { type: 'ADD_ORDER', payload: order}
+export const editBrand = (brand) => {
+    return { type: 'EDIT_BRAND', payload: brand}
 }
 
-export const startAddOrder = (formData) =>{
+export const startEditBrand = (formData) =>{
     return (dispatch) => {
-        axios.post('/orders', formData)
-        .then(response => {
-            if(response.data.hasOwnProperty('errors')){
-                alert(response.data.message)
-            }
-            else {
-                dispatch(addOrder(response.data))
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }
-}
-
-export const editOrder = (order) => {
-    return { type: 'EDIT_ORDER', payload: order}
-}
-
-export const startEditOrder = (formData) =>{
-    return (dispatch) => {
-        axios.put('/orders/:id',formData,{
+        axios.put('/brands/:id',formData,{
             headers:{
                 'x-auth':localStorage.getItem('userAuthToken')
             }
@@ -62,7 +56,7 @@ export const startEditOrder = (formData) =>{
                 alert(response.data.message)
             }
             else {
-                dispatch(editOrder(response.data))
+                dispatch(editBrand(response.data))
             }
         })
         .catch((err) => {
@@ -71,13 +65,13 @@ export const startEditOrder = (formData) =>{
     }
 }
 
-export const resetOrder = () => {
-    return { type: 'RESET_ORDER'}
+export const resetBrand = () => {
+    return { type: 'RESET_BRAND'}
 }
 
-export const startResetOrder = () =>{
+export const startResetBrand = () =>{
     return (dispatch) => {
-        axios.delete('/orders/:id',{
+        axios.delete('/brands/:id',{
             headers:{
                 'x-auth':localStorage.getItem('userAuthToken')
             }
@@ -87,7 +81,7 @@ export const startResetOrder = () =>{
                 alert(response.data.message)
             }
             else {
-                dispatch(resetOrder(response.data))
+                dispatch(resetBrand(response.data))
             }
         })
         .catch((err) => {
