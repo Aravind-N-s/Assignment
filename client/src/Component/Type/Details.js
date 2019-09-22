@@ -28,9 +28,13 @@ class TypeDetails extends React.Component{
     }
 
     render(props){
-        console.log(this.props.brand)
         return(
             <div>
+                {this.props.type &&(
+                    this.props.type.map((types) => {
+                        return (<h4>{types.name}</h4>)
+                    })
+                )}
             <form>
                 <label>
                     <span>Type Name</span><br/>

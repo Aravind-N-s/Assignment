@@ -48,6 +48,7 @@ const userSchema = new Schema ({
 //pre hooks
 userSchema.pre('save', function(next){
     const user = this
+    //if admin password is set then user is set as delivery agent
     if(user.isNew){
         bcryptjs.genSalt(10)
         .then(salt =>{

@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux'
-
+//order details
 const OrderShow = (props) => {
     console.log(props.order)
     return(
@@ -22,13 +22,13 @@ const OrderShow = (props) => {
                                 return (or.name)
                             })
                         )}<br/>
+                        {orders.units}<br/>
                         {orders.hasKids}<br/>
                         {orders.delivery}<br/>
-                        {orders.units}<br/>
                         {orders.note}<br/>
                     </li>
                 })}
-                </ul>           
+                </ul>           //darksky api can be used here to create maps
             )}
         </div>
     )

@@ -24,7 +24,7 @@ class App extends React.Component {
   render(props){
     return (
       <BrowserRouter>
-        {!_.isEmpty(this.props.user)?(
+        {!_.isEmpty(this.props.user)?( //logined in
           <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
               <a className="navbar-brand">
@@ -44,7 +44,7 @@ class App extends React.Component {
                     <button className="nav-link">Pricing</button>
                   </li>
                   <li className="nav-item">
-                    <button className="nav-link disabled">Disabled</button> 
+                    <button key='if admin is true it will be enabled' className="nav-link disabled">Admin</button> 
                   </li>
                 </ul>
               </div>
@@ -52,17 +52,18 @@ class App extends React.Component {
             <Link to="/users/account">Account</Link><br/>
             <Link to="/brand">Brand</Link><br/>          
             <Link to="/type">Type</Link>
-            <OrderShow/>
+            <Link to="/order">Order</Link>
             <Switch>
               <>                
                 <Route exact strict path="/users/account" component={Account}/>                     
                 <Route exact strict path="/users/logout" component={Logout}/>
                 <Route exact strict path="/brand" component={BrandDetails}/>       
                 <Route exact strict path="/type" component={TypeDetails}/>  
+                <Route exact strict path="/order" component={OrderShow}/>  
               </>
             </Switch>      
           </div>
-        ):(
+        ):( //logged out
           <div>
             <nav className="navbar navbar-dark bg-primary">
               <a className="navbar-brand">

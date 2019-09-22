@@ -6,15 +6,18 @@ const brandController = require('../api/controllers/brandController')
 const typeController = require('../api/controllers/typeController')
 const {authenticateUser} = require('../api/middleware/authentication')
 
+//orders routes are here
 router.get('/orders',authenticateUser, orderController.list)
 router.post('/orders',orderController.create)
 router.put('/orders/:id',authenticateUser, orderController.update)
 
+//brands routes are here
 router.get('/brands', brandController.list)
 router.post('/brands',authenticateUser, brandController.create)
 router.put('/brands/:id',authenticateUser, brandController.update)
 router.delete('/brands/:id',authenticateUser, brandController.destroy)
 
+//type routes are here
 router.get('/type', typeController.list)
 router.post('/type',authenticateUser, typeController.create)
 router.put('/type/:id',authenticateUser, typeController.update)

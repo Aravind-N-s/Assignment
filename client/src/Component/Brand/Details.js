@@ -26,11 +26,15 @@ class BrandDetails extends React.Component{
         }        
         this.props.dispatch(startAddBrand(formData))
     }
-
+    //for of brand and brand details are located here
     render(props){
-        console.log(this.props.brand)
         return(
             <div>
+                {this.props.brand &&(
+                    this.props.brand.map((brands) => {
+                        return (<h4>{brands.name}</h4>)
+                    })
+                )}
             <form>
                 <label>
                     <span>Brand Name</span><br/>
