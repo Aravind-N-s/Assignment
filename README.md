@@ -1,16 +1,17 @@
 ### running the app 
 
-'npm install' both in home and client folder
-this is version one
-port is 3005 
-MONGODB_URI = mongodb://localhost:27017/
+'npm install' both in home and client folder<br>
+this is version one<br>
+port is 3005 <br>
+MONGODB_URI = mongodb://localhost:27017/<br>
 
-version one is live 
+version one is live <br>
 
-version Two
-1.Allow users to create an account and schedule regular drops
-2.Set up admin account to set as an deliverer
-3.
+version Two<br>
+1.Allow users to create an account and schedule regular drops<br>
+2.Set up admin account to set as an deliverer<br>
+3.verify email and phone num<br>
+4.CSS on navigation bar<br>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
