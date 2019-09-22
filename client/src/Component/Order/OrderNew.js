@@ -1,9 +1,9 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import Select from 'react-select'
+import {connect} from 'react-redux'
 import {startAddOrder} from '../../Redux/Action/orderAction'
 
-class Order extends React.Component {
+class OrderNew extends React.Component {
     constructor(){
         super()
         this.state = { 
@@ -35,9 +35,11 @@ class Order extends React.Component {
 
     handleSelect(e){
         const select = e
-        this.setState(() => ({
-            [e.name] : select.map((sel) => {return sel.value})
-        }))    
+        select.map((sel) => {
+            this.setState(() => ({
+                [sel.name] : sel.value
+            }))
+        })
     }
 
     handleHasKids(e){
@@ -70,7 +72,6 @@ class Order extends React.Component {
             location: {latitude: this.state.latitude,longitude: this.state.longitude},
             brand: this.state.brand
         }
-        console.log(formData)
         this.props.dispatch(startAddOrder(formData))
     }
     
@@ -138,4 +139,4 @@ const mapStateToProps = (state) => {
         type: state.type
       }
 }
-export default connect(mapStateToProps)(Order)
+export default connect(mapStateToProps)(OrderNew)

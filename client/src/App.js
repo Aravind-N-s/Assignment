@@ -13,7 +13,8 @@ import Logout from './Component/User/Logout'
 import Account from './Component/User/Account'
 import Register from './Component/User/Register' 
 
-import Order from './Component/Order/Order'
+import OrderNew from './Component/Order/OrderNew'
+import OrderShow from './Component/Order/OrderShow'
 
 import BrandDetails from './Component/Brand/Details'
 
@@ -50,13 +51,14 @@ class App extends React.Component {
             </nav>        
             <Link to="/users/account">Account</Link><br/>
             <Link to="/brand">Brand</Link><br/>          
-            <Link to="/type">Type</Link>            
+            <Link to="/type">Type</Link>
+            <OrderShow/>
             <Switch>
               <>                
                 <Route exact strict path="/users/account" component={Account}/>                     
                 <Route exact strict path="/users/logout" component={Logout}/>
                 <Route exact strict path="/brand" component={BrandDetails}/>       
-                <Route exact strict path="/type" component={TypeDetails}/>       
+                <Route exact strict path="/type" component={TypeDetails}/>  
               </>
             </Switch>      
           </div>
@@ -76,7 +78,7 @@ class App extends React.Component {
                     <Tab>Login</Tab>
                     <Tab>Register</Tab>
                   </TabList>
-                  <TabPanel className={{marginBottom:"0%"}}><Order/></TabPanel>
+                  <TabPanel className={{marginBottom:"0%"}}><OrderNew/></TabPanel>
                   <TabPanel><Login handleAuth={this.handleAuth}/></TabPanel>
                   <TabPanel><Register handleAuth={this.handleAuth}/></TabPanel>
               </Tabs>
@@ -92,7 +94,8 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     brand: state.brand,
-    type: state.type
+    type: state.type,
+    order: state.order
   }
 }
 export default connect(mapStateToProps)(App)

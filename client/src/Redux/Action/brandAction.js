@@ -1,7 +1,6 @@
 import axios from '../../Config/axios'
 
 export const setBrand = (brand) => {
-    console.log('action brand',brand)
     return { type: 'SET_BRAND', payload: brand}
 }
 
@@ -9,7 +8,6 @@ export const startSetBrand = () =>{
     return (dispatch) => {
         axios.get('/brands')
         .then(response => {
-            console.log('action brand',response.data)
             dispatch(setBrand(response.data))
         })
     }

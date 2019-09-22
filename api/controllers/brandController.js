@@ -1,4 +1,6 @@
 const Brand = require('../models/brand')
+
+//list brand to every one
 module.exports.list = (req,res) => {
     Brand.find().sort({createdAt: -1})
     .then((brands) => {
@@ -9,7 +11,7 @@ module.exports.list = (req,res) => {
     })
 }
 
-//post products
+//post brands by user only
 module.exports.create = (req,res) =>{
     const {user} = req
     const body = req.body
@@ -25,6 +27,7 @@ module.exports.create = (req,res) =>{
 
 }
 
+//edit brands by user only
 module.exports.update =  (req, res) => {
     const id = req.params.id
     const body = req.body
@@ -43,7 +46,7 @@ module.exports.update =  (req, res) => {
     })
 }
 
-//delete a brand
+//delete brands by user only
 module.exports.destroy = (req, res) => {
     const id = req.params.id
     Brand.findOneAndDelete({

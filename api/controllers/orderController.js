@@ -1,9 +1,7 @@
 const Order = require('../models/order')
+//get all orders
 module.exports.list = (req,res) => {
-    const {user} = req
-    Order.find({
-        user:user._id
-    }).sort({createdAt: -1})
+    Order.find().populate('type',['name']).populate('brand',['name']).sort({createdAt: -1})
     .then((orders) => {
         res.json(orders)
     })
@@ -41,6 +39,7 @@ module.exports.show = (req,res) => {
     })
 }
 
+//update one order
 module.exports.update =  (req, res) => {
     const id = req.params.id
     const body = req.body
@@ -57,3 +56,6 @@ module.exports.update =  (req, res) => {
         res.json(err)
     })
 }
+//can link to delivery schema to set as dispatched
+
+//delete can be set when delivery is confirmed

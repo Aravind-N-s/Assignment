@@ -20,3 +20,5 @@ const authenticateUser = function(req, res, next){
 module.exports = {
     authenticateUser
 } 
+
+//middleware to set up if user and token are given and correct

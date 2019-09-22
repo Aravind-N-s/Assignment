@@ -1,3 +1,4 @@
+//all routes are listed here so they can be modular and can be located
 const express = require ('express')
 const router = express.Router()
 const orderController = require('../api/controllers/orderController')

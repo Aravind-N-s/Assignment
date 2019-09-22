@@ -1,4 +1,5 @@
 const Type = require('../models/type')
+//show type in all types
 module.exports.list = (req,res) => {
     Type.find().sort({createdAt: -1})
     .then((types) => {
@@ -42,7 +43,7 @@ module.exports.show = (req,res) => {
         res.json(err)
     })
 }
-
+//update types
 module.exports.update =  (req, res) => {
     const id = req.params.id
     const body = req.body
