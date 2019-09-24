@@ -28,7 +28,7 @@ const OrderShow = (props) => {
                         {orders.note}<br/>
                     </li>
                 })}
-                </ul>           //darksky api can be used here to create maps
+                </ul> //darksky api can be used here to create maps
             )}
         </div>
     )

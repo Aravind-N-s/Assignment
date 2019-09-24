@@ -8,13 +8,15 @@ import { startSetType } from './Redux/Action/typeAction'
 import { startSetOrder } from './Redux/Action/orderAction'
 import configureStore from './Redux/Store/configureStore'
 
-const store = configureStore()
-if(localStorage.getItem('userAuthToken')){
+const store = configureStore() 
+
+if(localStorage.getItem('userAuthToken')){ //conditional check to trigger the calling of users account data and the orders data
     store.dispatch(startAddUser())
     store.dispatch(startSetOrder())
 }
-store.dispatch(startSetBrand())
+store.dispatch(startSetBrand()) 
 store.dispatch(startSetType())
+
 const jsx = (
     <Provider store={store}>
         <App />

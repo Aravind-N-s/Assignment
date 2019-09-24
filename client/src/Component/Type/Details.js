@@ -12,13 +12,15 @@ class TypeDetails extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+    //this function is called when inputs are given to the form.
     handleChange(e){
         e.persist()
         this.setState(() => ({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value //the target value is used to set the state value
         }))
     }
 
+    //this function is called on the clcik of the submit button, the state value is collected as the form data and sent to the redux action
     handleSubmit(e){
         e.preventDefault()
         const formData = {
@@ -27,8 +29,9 @@ class TypeDetails extends React.Component{
         this.props.dispatch(startAddType(formData))
     }
 
+    //form of type and type details are located here
     render(props){
-        return(
+        return(//this returns the type name and form to add type.
             <div>
                 {this.props.type &&(
                     this.props.type.map((types) => {

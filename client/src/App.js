@@ -24,9 +24,14 @@ class App extends React.Component {
   render(props){
     return (
       <BrowserRouter>
-        {!_.isEmpty(this.props.user)?( //logined in
+        {!_.isEmpty(this.props.user)?( /* 
+        ternary operator to check if user is logged in or not
+        contained a nav bars which additional options (v2)
+        has links to add brands and types 
+        has links to check for the orders given
+        */
           <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary"> 
               <a className="navbar-brand">
                 <img src="/2.jpg" width="30" height="30" className="d-inline-block align-top" alt=""/>MilkMaid</a>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +68,11 @@ class App extends React.Component {
               </>
             </Switch>      
           </div>
-        ):( //logged out
+        ):( /* used react tabs to give 3 panels 
+          1st to place an order
+          2nd to login to view the order
+          3rd to register for a new user
+          */
           <div>
             <nav className="navbar navbar-dark bg-primary">
               <a className="navbar-brand">
@@ -75,7 +84,7 @@ class App extends React.Component {
               <img id="img" alt="loginImg" src="/1.jpeg"/>
               <Tabs id="tabs">
                   <TabList>
-                    <Tab>Buy</Tab>
+                    <Tab>Buy</Tab> 
                     <Tab>Login</Tab>
                     <Tab>Register</Tab>
                   </TabList>

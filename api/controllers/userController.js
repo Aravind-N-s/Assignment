@@ -35,7 +35,7 @@ router.post('/login', (req,res) =>{
 //localhost:3005/users/account
 router.get('/account',authenticateUser, (req,res)=>{
     const {user} = req
-    res.send(_.pick(user, ['_id','username','email','createdAt']))
+    res.send(_.pick(user, ['_id','username','email','createdAt'])) //used to send specific data to the content
 })
 
 //localhost:3005/users/logout

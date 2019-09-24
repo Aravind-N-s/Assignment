@@ -1,4 +1,4 @@
-require('dotenv/config')
+require('dotenv/config') 
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcryptjs = require('bcryptjs')
@@ -31,8 +31,8 @@ const userSchema = new Schema ({
         maxlength: 128
     },
     location:{
-        type: String,
-        required: true
+        type: String
+        // required: true
     },
     tokens:[{
         token:{

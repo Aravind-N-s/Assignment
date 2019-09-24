@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-//Schema - Object Constructor Function
 const Schema = mongoose.Schema
 const TypeSchema = new Schema({
     name:{

@@ -19,13 +19,15 @@ class OrderNew extends React.Component {
             note:'',
             order: false
         }
-        this.handleUnits = this.handleUnits.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleHasKids = this.handleHasKids.bind(this)
-        this.handleLocation = this.handleLocation.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
+        this.handleHasKids = this.handleHasKids.bind(this)
+        this.handleUnits = this.handleUnits.bind(this)
+        this.handleLocation = this.handleLocation.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+    //this function is used to update the state value which is set in the form.
     handleChange(e){
         e.persist()
         this.setState(() => ({
@@ -33,6 +35,7 @@ class OrderNew extends React.Component {
         }))
     }
 
+    //this function sets the value the state value form the React Select option to state
     handleSelect(e){
         const select = e
         select.map((sel) => {
@@ -42,10 +45,12 @@ class OrderNew extends React.Component {
         })
     }
 
+    //on click of the check box this function set the value of the hasKids to its opposite
     handleHasKids(e){
         this.setState((prevState) => ({hasKids: !prevState.hasKids}))
     }
 
+    //on click of the up or down button this function increases or decreases the unit value in setState by 0.5
     handleUnits(e){
         e.preventDefault()
         if(e.target.name == 'up'){
@@ -59,6 +64,20 @@ class OrderNew extends React.Component {
         }
     }
 
+    //this function sets the value of the location by using the navigate method
+    handleLocation(e){
+        e.preventDefault()
+        let success = (pos) => {
+            var crd = pos.coords;
+            this.setState(() => ({
+                latitude: crd.latitude,
+                longitude: crd.longitude
+            }))
+        }
+        navigator.geolocation.getCurrentPosition(success)    
+    }
+
+    //This function combines the values in the state to formData and sent to redux action to post the data
     handleSubmit(e){
         e.preventDefault()
         const formData = {
@@ -74,22 +93,9 @@ class OrderNew extends React.Component {
         }
         this.props.dispatch(startAddOrder(formData))
     }
-    
-    handleLocation(e){
-        e.preventDefault()
-        let success = (pos) => {
-            var crd = pos.coords;
-            this.setState(() => ({
-                latitude: crd.latitude,
-                longitude: crd.longitude
-            }))
-        }
-        navigator.geolocation.getCurrentPosition(success)
-        
-    }
+
     render() {    
-        console.log(this.state)  
-        return (
+        return ( //complete form of the order data
             <form id = "form">
                 <label id = "input">
                     <input  className = "xs-4 form-control" type="text" name="name" value={this.state.name}  onChange={this.handleChange} placeholder="Name"/>

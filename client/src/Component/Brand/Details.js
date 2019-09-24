@@ -12,13 +12,15 @@ class BrandDetails extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+    //this function is called when inputs are given to the form. 
     handleChange(e){
         e.persist()
         this.setState(() => ({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value //the target value is used to set the state value
         }))
     }
 
+    //this function is called on the clcik of the submit button, the state value is collected as the form data and sent to the redux action
     handleSubmit(e){
         e.preventDefault()
         const formData = {
@@ -26,9 +28,10 @@ class BrandDetails extends React.Component{
         }        
         this.props.dispatch(startAddBrand(formData))
     }
-    //for of brand and brand details are located here
+    //form of brand and brand details are located here
     render(props){
         return(
+            //this returns the brand name and form to add brand.
             <div>
                 {this.props.brand &&(
                     this.props.brand.map((brands) => {

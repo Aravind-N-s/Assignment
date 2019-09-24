@@ -43,7 +43,7 @@ module.exports.show = (req,res) => {
         res.json(err)
     })
 }
-//update types
+//update a specific type
 module.exports.update =  (req, res) => {
     const id = req.params.id
     const body = req.body
